@@ -1,80 +1,88 @@
-╔═════════════════════════════════════════════════════╗
-║ Xbox 360 Hard Drive Partititon 3 Contents Extractor ║
-╚═════════════════════════════════════════════════════╝
+╔═════════════════════════════════════════════════════╗  
+║ Xbox 360 Hard Drive Partition 3 Contents Extractor ║  
+╚═════════════════════════════════════════════════════╝  
 
-╔═════════════════════════════════════════════════╗
-║ Partition 3 in the Xbox 360 Hard Drive contains ║
-╚═════════════════════════════════════════════════╝
-  └── 0000000000000000 Folder
-      └── System Wide Content: DLC, Gamerpic Packs, Themes, XBLA
-  └── E0000035D80184C8 Folders (varies per user profile)
+╔═════════════════════════════════════════════════╗  
+║ Partition 3 in the Xbox 360 Hard Drive contains ║  
+╚═════════════════════════════════════════════════╝  
+  └── 0000000000000000 Folder  
+      └── System Wide Content: DLC, Gamerpic Packs, Themes, XBLA  
+  └── E0000035D80184C8 Folders (varies per user profile)  
       └── User Profile Content: Gamertag, Gamerpic, Avatar Data, Save Settings  
 
-╔══════╗
-║ Demo ║
-╚══════╝
-![Xbox 360 Partition 3 Image Extractor](demo/xbox360extract.gif)
+---
 
-╔═════╗
-║ Use ║
-╚═════╝
-$ python3 xbox360imgextract.py
+## 🎬 Demo  
+![Xbox 360 Partition 3 Image Extractor](demo/xbox360extract-ezgif.com-speed.gif)  
+
+---
+
+## 🖥️ Use  
+```bash
+$ python3 xbox360imgextract.py  
 Enter folder path: .
+```
 
-╔═════════╗
-║ Imports ║
-╚═════════╝
-os - basic python library for operating system interaction
-tqdm - loading bar/progress bar visualization for file processing
+---
 
-╔═════════════════════════╗
-║ Image Header Signatures ║
-╚═════════════════════════╝
-Formats: png, jpeg, gif (older & newer)
-Does: Maps file signature bytes aka magic numbers to the corresponding file types.
-Use: Detect embedded images in binary files.
+## 📦 Imports  
+- `os` – standard Python library for file and directory operations  
+- `tqdm` – adds a visual loading/progress bar for file processing  
 
-╔════════════╗
-║ Chunk Size ║
-╚════════════╝
-Does: Controls how much data is extracted after a signature is found.
-Use: Prevents writing entire files unnecessarily.
+---
 
-╔═════════════════════════════════════════╗
-║ Extract Image Function from Binary File ║
-╚═════════════════════════════════════════╝
-def extract_images_from_file(filepath, output_dir):
-Does: Reads a binary file and searches for known image signatures.
-Use: If match -> Extracts 100KB chunk or to EOF -> Saves as image in output dir.
-     Returns # of images extracted from specific file.
-Recap of Key Segments: Read full binary content -> Search for image signature -> write image chunk to file.
+## 🧠 Image Header Signatures  
+**Formats Supported:** PNG, JPEG, GIF (87a & 89a)  
+- Maps file signature bytes (magic numbers) to image file types  
+- Detects embedded images in binary files  
 
-╔══════════════════════════╗
-║ Directory Walk & Extract ║
-╚══════════════════════════╝
-def walk_and_extract_images(root_folder):
-Does: Recursively traverses nested folders and calls extract image function on each file.
-Use: Tracks total # images extracted & saves to /img_extracts sub-directory.
-Recap of Key Segments: Walks every directory & file -> Shows a progress bar via tqdm
+---
 
-╔═══════════════════════════╗
-║ Main & Script Entry Point ║
-╚═══════════════════════════╝
+## 🧱 Chunk Size  
+- Defines how much data to extract after an image signature is found  
+- Prevents saving entire binary files unnecessarily  
+
+---
+
+## 🔍 Extract Image Function  
+`def extract_images_from_file(filepath, output_dir):`  
+- Reads binary file → Searches for known image signatures  
+- If match:  
+  → Extracts 100KB chunk or to EOF  
+  → Saves as image in output directory  
+- Returns number of images extracted from the file  
+
+---
+
+## 📁 Directory Walk & Extract  
+`def walk_and_extract_images(root_folder):`  
+- Recursively traverses nested folders  
+- Calls `extract_images_from_file()` on every file  
+- Tracks total images extracted and saves them to `/img_extracts`  
+- Displays a progress bar using `tqdm`  
+
+---
+
+## 🚀 Script Entry Point  
+```python
 if __name__ == "__main__":
-Use: Prompts user for a folder path.
+```
+- Prompts the user to input a folder path  
 
-╔═════════╗
-║ Summary ║
-╚═════════╝
-- Recursively scans all files in a folder.
-- Checks for embedded image file sigs.
-- Extracts a chunk starting from each sig.
-- Saves extracted data as img files in /img_extracts.
-- Progress bar for download.
+---
 
-╔═══════════════╗
-║ ASCII Diagram ║
-╚═══════════════╝
+## 📝 Summary  
+- Recursively scans all files in the specified folder  
+- Detects embedded image file signatures  
+- Extracts chunks from matched signatures  
+- Saves images to `/img_extracts`  
+- Visual progress via loading bar  
+
+---
+
+## 📊 ASCII Diagram  
+
+```
 +-----------------------------+
 |      User Input path        |
 +-------------+---------------+
@@ -86,8 +94,7 @@ Use: Prompts user for a folder path.
               |
               v
 +-----------------------------+
-| Recursively Walk through all|
-|       files in folder       |
+| Recursively walk all files  |
 +-------------+---------------+
               |
               v
@@ -100,10 +107,10 @@ Use: Prompts user for a folder path.
 |  For each image signature:  |
 |   ┌──────────────────────┐  |
 |   │ Search for signature │  |
-|   │ If signature:        │  |
+|   │ If found:            │  |
 |   │  • Extract chunk     │  |
 |   │  • Save as png/jpg   │  |
-|   │  • increment         │  |
+|   │  • Increment counter │  |
 |   └──────────────────────┘  |
 +-------------+---------------+
               |
@@ -122,3 +129,4 @@ Use: Prompts user for a folder path.
            +-----+
            | End |
            +-----+
+```
