@@ -1,5 +1,6 @@
+"""
 ╔═════════════════════════════════════════════════════╗
-║ Xbox 360 Hard Drive Partition 3 Contents Extractor ║
+║ Xbox 360 Hard Drive Partition 3 Contents Extractor  ║
 ╚═════════════════════════════════════════════════════╝
 
 ╔═════════════════════════════════════════════════╗
@@ -121,3 +122,4 @@ Use: Prompts user for a folder path.
            +-----+
            | End |
            +-----+
+"""
