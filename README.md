@@ -14,7 +14,7 @@
 ╔══════╗
 ║ Demo ║
 ╚══════╝
-![Xbox 360 Partition 3 Image Extractor](demo/xbox360extract-ezgif.com-speed.gif)
+![Xbox 360 Partition 3 Image Extractor](demo/xbox360extract.gif)
 
 ╔═════╗
 ║ Use ║
